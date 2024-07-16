@@ -1,5 +1,5 @@
 FROM node:20-alpine as build
-WORKDIR /avatar_frontend
+WORKDIR /cybergpt_new
 COPY package*.json ./
 RUN npm install
 COPY . ./
