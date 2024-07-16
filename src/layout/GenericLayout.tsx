@@ -11,8 +11,8 @@ export const GenericLayout: FC<GenericLayoutPropsType> = (props) => {
       <Header
         nav={[
           {
-            link: "PicQuest",
-            name: "BankGPT",
+            link: "cybernew",
+            name: "CyberGPT",
           },
           // {
           // 	link: 'ReportComply',

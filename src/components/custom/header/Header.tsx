@@ -107,7 +107,7 @@ export const Header: FC<HeaderPropsType> = (props) => {
             />
           </span>
           <h1 className="text-[1rem] font-bold dark:text-white logo-font">
-            Bank GPT
+          Cyber GPT
           </h1>
         </div>
         <ul className="flex gap-2 text-[#646363] dark:text-[#e7e4e4] text-sm ">

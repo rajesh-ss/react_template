@@ -8,6 +8,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { PicQuestModal } from "@/components/custom/modal/picQuestModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { TbTools } from "react-icons/tb";
 import {
   HoverCard,
   HoverCardContent,
@@ -22,9 +23,13 @@ import {
   bankGPTChat,
 } from "@/store/slices/PicQuestSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { UploadControlsModal } from "@/components/custom/modal/UploadControlsModal";
 
 export const PicQuest = () => {
   const [open, setOpen] = useState(false);
+
+  const [uploadControls, setUploadControls] = useState(false);
+
   const [query, setQuery] = useState<string>("");
   const customDispatch = useCustomDispatch();
   const dispatch = useDispatch();
@@ -40,9 +45,9 @@ export const PicQuest = () => {
     customDispatch(bankGPTChat(query))
       .unwrap()
       .then((res) => {
-        console.log(res?.response);
+        // console.log(res?.response);
         const paylaod: allQueriesType = {
-          ans: res?.response,
+          ans: res?.data,
           qns: query,
         };
         dispatch(addQnsAns(paylaod));
@@ -57,7 +62,9 @@ export const PicQuest = () => {
     setOpen(true);
   };
 
-  console.log(addQnsAnsRes);
+  const onClickUploadContrDoc = () => {
+    setUploadControls(true);
+  };
 
   // console.log(import.meta.env.VITE_PICQUEST);
   return (
@@ -66,28 +73,43 @@ export const PicQuest = () => {
         <HoverCard>
           <HoverCardTrigger asChild>
             <h1 className="text-base font-extrabold dark:text-white">
-              BankGPT
+              CyberGPT
             </h1>
           </HoverCardTrigger>
           <HoverCardContent className="w-80 bg-[#fff] dark:bg-[#000] dark:text-white">
             <div className="flex justify-between space-x-4">
               <Avatar>
                 <AvatarImage src={processingImage} />
-                <AvatarFallback>BankGPT</AvatarFallback>
+                <AvatarFallback>CyberGPT</AvatarFallback>
               </Avatar>
               <div className="space-y-1">
-                <h4 className="text-sm font-semibold">BankGPT</h4>
+                <h4 className="text-sm font-semibold">CyberGPT</h4>
                 <p className="text-sm">Upload bankGPT documents</p>
               </div>
             </div>
           </HoverCardContent>
         </HoverCard>
 
-        <PicQuestModal open={open} setOpen={setOpen}>
-          <Button onClick={onClickAddBtn}>
-            <IoAddCircleSharp className="h-7 w-7 hover:scale-105 dark:text-[#fff]" />
+        <div>
+          <div className="hidden">
+            <PicQuestModal open={open} setOpen={setOpen}>
+              <Button onClick={onClickAddBtn}>
+                <IoAddCircleSharp className="h-7 w-7 hover:scale-105 dark:text-[#fff] " />
+              </Button>
+            </PicQuestModal>
+          </div>
+
+          <Button>
+            <UploadControlsModal
+              open={uploadControls}
+              setOpen={setUploadControls}
+            >
+              <Button onClick={onClickUploadContrDoc}>
+                <IoAddCircleSharp className="text-xl" />
+              </Button>
+            </UploadControlsModal>
           </Button>
-        </PicQuestModal>
+        </div>
       </div>
       <div className="pt-10  border-green-900 h-[calc(100vh-3.6rem-3rem-5rem)] overflow-x-hidden overflow-y-auto scroll-bar-medium-w scroll-bar-transparent   scroll-bar-thumb-rounded scroll-bar-thumb-grey bg-white dark:bg-[#000]">
         {addQnsAnsRes?.map((eachChat) => (
@@ -95,18 +117,34 @@ export const PicQuest = () => {
             className={` px-4 py-2 rounded-[0.3rem]  gap-3 dark:text-white break-words container`}
             key={nanoid()}
           >
-            <div className="p-2 my-3 flex gap-3 items-center ">
+            <div
+              className={`p-2 my-3 flex gap-3 items-center ${
+                eachChat?.qns?.length > 0 ? "" : "hidden"
+              }`}
+            >
               <FaRegUser className="w-6 h-6 dark:text-[#cac8c8] " />
               <p className="break-words lg:max-w-[75%] dark:text-[#acaaaa] light text-sm">
                 {eachChat?.qns}
               </p>
             </div>
-            <div className="p-2 my-3 flex gap-3 items-center ">
-              <GiProcessor className="w-6 h-6 dark:text-[#cac8c8] " />
-              <p className="break-words lg:max-w-[75%] dark:text-[#acaaaa] text-sm">
-                {/* {eachChat?.ans} */}
-                <div dangerouslySetInnerHTML={{ __html: eachChat?.ans }} />
-              </p>
+            <div className="p-2 my-3 flex  gap-10 justify-start items-start ">
+              <div className="">
+                <GiProcessor className="w-6 h-6 dark:text-[#cac8c8] " />
+              </div>
+              <ul className="list-disc ">
+                {eachChat?.ans?.map((eachAns) => (
+                  <li
+                    className="break-words lg:max-w-[90%] dark:text-[#acaaaa] font-normal text-md mb-5 text-black dark:text-white"
+                    key={nanoid()}
+                  >
+                    <span className="font-extrabold text-lg scale-110 mr-2">
+                      {" "}
+                      {eachAns?.split(":\n")[0]}:
+                    </span>
+                    {eachAns?.split(":\n")[1]}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
@@ -125,7 +163,7 @@ export const PicQuest = () => {
           />
           <Button
             type="button"
-            className="hover:scale-x-110"
+            className="hover:scale-x-110 "
             disabled={bankGPTChatRes?.isLoading}
           >
             <PaperPlaneIcon className=" h-6 w-6 border-0 dark:text-white" />

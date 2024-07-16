@@ -14,7 +14,7 @@ const router = createBrowserRouter(
       },
       children: [
         {
-          path: "PicQuest",
+          path: "cybernew",
           async lazy() {
             let { PicQuestLayout } = await import("@layout/PicQuestLayout.tsx");
             return { Component: PicQuestLayout };
@@ -29,23 +29,11 @@ const router = createBrowserRouter(
             },
           ],
         },
-        // {
-        // 	path: 'ReportComply',
-        // 	element: <>It works Bro </>,
-        // },
-        // {
-        // 	path: 'CompareDocs',
-        // 	element: <>It works Bro </>,
-        // },
-        // {
-        // 	path: 'DocuSense',
-        // 	element: <>It works Bro </>,
-        // },
       ],
     },
   ],
   {
-    // basename: '/cybergpt/',
+    basename: '/cybernew/',
   }
 );
 
