@@ -1,6 +1,6 @@
 // import { Button } from '@/components/ui/button';
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { GiProcessor } from "react-icons/gi";
 import { FaRegUser } from "react-icons/fa6";
 import { nanoid } from "@reduxjs/toolkit";
@@ -51,6 +51,14 @@ export const PicQuest = () => {
     "Just a moment, please...",
   ];
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  };
+
   const onSubmitChat = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     customDispatch(bankGPTChat(query))
@@ -81,9 +89,15 @@ export const PicQuest = () => {
     if (bankGPTChatRes?.isLoading) {
       const intervalId = setInterval(() => {
         setStatusIndex((prevIndex) => (prevIndex + 1) % statusMessages.length);
-      }, 3000); // Change status every 2 seconds
-      console.log("gotha");
+      }, 3000);
       return () => clearInterval(intervalId);
+    }
+  }, [bankGPTChatRes]);
+
+  useEffect(() => {
+    if (bankGPTChatRes?.data) {
+      setQuery("");
+      scrollToBottom();
     }
   }, [bankGPTChatRes]);
 
@@ -150,7 +164,10 @@ export const PicQuest = () => {
             </Button>
           </div>
         </div>
-        <div className="pt-10  border-green-900 h-[calc(100vh-3.6rem-3rem-5rem)] overflow-x-hidden overflow-y-auto scroll-bar-medium-w scroll-bar-transparent   scroll-bar-thumb-rounded scroll-bar-thumb-grey bg-white dark:bg-[#000]">
+        <div
+          ref={containerRef}
+          className="pt-10  border-green-900 h-[calc(100vh-3.6rem-3rem-5rem)] overflow-x-hidden overflow-y-auto scroll-bar-medium-w scroll-bar-transparent   scroll-bar-thumb-rounded scroll-bar-thumb-grey bg-white dark:bg-[#000]"
+        >
           {addQnsAnsRes?.map((eachChat) => (
             <div
               className={` px-4 py-2 rounded-[0.3rem]  gap-3 dark:text-white break-words container`}
@@ -171,28 +188,10 @@ export const PicQuest = () => {
                   <GiProcessor className="w-6 h-6 dark:text-[#cac8c8] " />
                 </div>
                 <div>
-                  {/* <div
-                  dangerouslySetInnerHTML={{ __html: eachChat?.ans }}
-                  className=" h-auto "
-                /> */}
                   <Markdown remarkPlugins={[remarkGfm]}>
                     {eachChat?.ans}
                   </Markdown>
                 </div>
-                {/* <ul className="list-disc "> */}
-                {/* {eachChat?.ans?.map((eachAns) => (
-                  <li
-                    className="break-words lg:max-w-[90%] dark:text-[#acaaaa] font-normal text-md mb-5 text-black dark:text-white"
-                    key={nanoid()}
-                  >
-                    <span className="font-extrabold text-lg scale-110 mr-2">
-                      {" "}
-                      {eachAns?.split(":\n")[0]}:
-                    </span>
-                    {eachAns?.split(":\n")[1]}
-                  </li>
-                ))} */}
-                {/* </ul> */}
               </div>
             </div>
           ))}

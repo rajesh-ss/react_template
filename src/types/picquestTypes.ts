@@ -1,5 +1,5 @@
 export type picQuestPostUploadImagesSuccessType = {
-  data: string;
+  // data: string;
   status: true;
   message: string;
 };
