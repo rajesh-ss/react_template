@@ -2,105 +2,305 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Roboto Black */
 @font-face {
-    font-family: 'jost';
-    src: url('./assets/fonts/Jost/static/Jost-Regular.ttf') format('truetype');
-    font-weight: 600; 
-    font-style: normal;
-	/* font-size: xx-large; */
+  font-family: "jost";
+  src: url("./assets/fonts/Jost/static/Jost-Regular.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  /* font-size: xx-large; */
 }
 
 @font-face {
-    font-family: 'jost-extra-bold';
-    src: url('./assets/fonts/Jost/static/Jost-ExtraBold.ttf') format('truetype');
-    /* font-weight: 100;  */
-    font-style: normal;
-	/* font-size: xx-large; */
-}
-
-
-@font-face {
-    font-family: 'jost-medium';
-    src: url('./assets/fonts/Jost/static/Jost-Medium.ttf') format('truetype');
-    font-weight: 900; 
-    font-style: normal;
-	/* font-size: xx-large; */
-}
-
-
-@font-face {
-    font-family: 'jost-italics';
-    src: url('./assets/fonts/Jost/static/Jost-SemiBoldItalic.ttf') format('truetype');
-    font-weight: 900; 
-    font-style: normal;
-	/* font-size: xx-large; */
+  font-family: "jost-extra-bold";
+  src: url("./assets/fonts/Jost/static/Jost-ExtraBold.ttf") format("truetype");
+  /* font-weight: 100;  */
+  font-style: normal;
+  /* font-size: xx-large; */
 }
 
 @font-face {
-    font-family: 'jost-light';
-    src: url('./assets/fonts/Jost/static/Jost-Medium.ttf') format('truetype');
-    font-weight: 900; 
-    font-style: normal;
-	/* font-size: xx-large; */
+  font-family: "jost-medium";
+  src: url("./assets/fonts/Jost/static/Jost-Medium.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+@font-face {
+  font-family: "jost-italics";
+  src: url("./assets/fonts/Jost/static/Jost-SemiBoldItalic.ttf")
+    format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+@font-face {
+  font-family: "jost-light";
+  src: url("./assets/fonts/Jost/static/Jost-Medium.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
 }
 @font-face {
-    font-family: 'jost-extra-light';
-    src: url('./assets/fonts/Jost/static/Jost-LightItalic.ttf') format('truetype');
-    font-weight: 900; 
-    font-style: normal;
-	/* font-size: xx-large; */
+  font-family: "jost-extra-light";
+  src: url("./assets/fonts/Jost/static/Jost-LightItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
 }
 
 * {
-	box-sizing: border-box;
-	/* font-family: 'Alegreya Sans', sans-serif; */
-	font-family: 'jost';
-
+  box-sizing: border-box;
+  /* font-family: 'Alegreya Sans', sans-serif; */
+  font-family: "jost";
 }
-
 
 html,
 body {
-	max-width: 100vw;
-	min-width: 100vw;
-	max-height: 100vh;
-	min-height: 100vh;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	font-family: 'jost';
+  max-width: 100vw;
+  min-width: 100vw;
+  max-height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: "jost";
 }
 
-.logo-font{
-	font-family: 'jost-extra-bold';
+.logo-font {
+  font-family: "jost-extra-bold";
 }
 
-.nav-font{
-	font-family: 'jost-medium';
+.nav-font {
+  font-family: "jost-medium";
 }
 
-.italics{
-	font-family: 'jost-italics';
+.italics {
+  font-family: "jost-italics";
 }
 
-.light{
-	font-family: 'jost-light';
+.light {
+  font-family: "jost-light";
 }
 
-.extra-light-italics{
-	font-family: 'jost-extra-light';
+.extra-light-italics {
+  font-family: "jost-extra-light";
 }
 
 body {
-	position: relative;
+  position: relative;
 }
 
 @layer components {
-	.active-nav {
-		@apply  border-black dark:border-white cursor-pointer hover:scale-105 text-[#2f2e2e] dark:text-[#fff] hover:text-[#2f2e2e] dark:hover:text-[#fff]  font-bold px-3 py-1 rounded-xl bg-[#dfdbdb] dark:bg-[#343333]
-	}
-	.inactive-nav {
-		@apply cursor-pointer hover:scale-105 hover:text-[#2f2e2e] dark:hover:text-[#fff] px-3 py-1 rounded-xl bg-[#ffffff] dark:bg-[#000]
-	}
+  .active-nav {
+    @apply border-black dark:border-white cursor-pointer hover:scale-105 text-[#2f2e2e] dark:text-[#fff] hover:text-[#2f2e2e] dark:hover:text-[#fff]  font-bold px-3 py-1 rounded-xl bg-[#dfdbdb] dark:bg-[#343333];
+  }
+  .inactive-nav {
+    @apply cursor-pointer hover:scale-105 hover:text-[#2f2e2e] dark:hover:text-[#fff] px-3 py-1 rounded-xl bg-[#ffffff] dark:bg-[#000];
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Roboto Black */
+@font-face {
+  font-family: "jost";
+  src: url("./assets/fonts/Jost/static/Jost-Regular.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+@font-face {
+  font-family: "jost-extra-bold";
+  src: url("./assets/fonts/Jost/static/Jost-ExtraBold.ttf") format("truetype");
+  /* font-weight: 100;  */
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+@font-face {
+  font-family: "jost-medium";
+  src: url("./assets/fonts/Jost/static/Jost-Medium.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+@font-face {
+  font-family: "jost-italics";
+  src: url("./assets/fonts/Jost/static/Jost-SemiBoldItalic.ttf")
+    format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+@font-face {
+  font-family: "jost-light";
+  src: url("./assets/fonts/Jost/static/Jost-Medium.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+@font-face {
+  font-family: "jost-extra-light";
+  src: url("./assets/fonts/Jost/static/Jost-LightItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  /* font-size: xx-large; */
+}
+
+* {
+  box-sizing: border-box;
+  /* font-family: 'Alegreya Sans', sans-serif; */
+  font-family: "jost";
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-width: 100vw;
+  max-height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: "jost";
+}
+
+.logo-font {
+  font-family: "jost-extra-bold";
+}
+
+.nav-font {
+  font-family: "jost-medium";
+}
+
+.italics {
+  font-family: "jost-italics";
+}
+
+.light {
+  font-family: "jost-light";
+}
+
+.extra-light-italics {
+  font-family: "jost-extra-light";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
+ul,
+ol {
+  @apply list-disc list-inside space-y-2 px-2 py-1 bg-gray-100 rounded-md my-5;
+}
+
+code {
+  @apply space-y-0 px-2 py-1 bg-gray-200 my-0 rounded-md;
+}
+
+pre {
+  @apply space-y-2 p-2 bg-gray-200 my-5 rounded-md block;
+}
+
+li strong {
+  @apply font-extrabold text-2xl;
+}
+
+li {
+  /* @apply text-blue-500; */
+  @apply text-xl ml-2;
+}
+
+.custom-nested-list {
+  @apply list-disc list-inside ml-6 space-y-2;
+}
+
+body {
+  position: relative;
+}
+
+h1 {
+  font-size: 1.5rem !important;
+  /* border: 2px solid black; */
+}
+
+h3 {
+  font-size: 1.4rem !important;
+  font-weight: 900 !important;
+}
+
+p {
+  font-size: 1.3rem !important;
+  font-weight: 300;
+}
+
+p strong {
+  font-size: 1.3rem !important;
+  font-weight: 900 !important;
+  display: inline;
+}
+
+h1 strong {
+  font-size: 1.5rem !important;
+  font-weight: 900;
+}
+
+ul,
+li {
+  /* list-style: disc outside; */
+  list-style-type: disc;
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+ol,
+li {
+  /* list-style: disc outside; */
+  list-style-type: disc;
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+
+li > p {
+  display: inline;
+}
+
+ul,
+li > ul li {
+  list-style: circle inside;
+  list-style-type: circle;
+  /* font-size: 1.2rem; */
+  font-weight: 200;
+}
+
+ol,
+li > ul li {
+  list-style: circle inside;
+  list-style-type: circle;
+  /* font-size: 1.2rem; */
+  font-weight: 200;
+}
+
+li strong {
+  font-size: 1.3rem !important;
+  font-weight: 900 !important;
+}
+
+@layer components {
+  .active-nav {
+    @apply border-black dark:border-white cursor-pointer hover:scale-105 text-[#2f2e2e] dark:text-[#fff] hover:text-[#2f2e2e] dark:hover:text-[#fff]  font-bold px-3 py-1 rounded-xl bg-[#dfdbdb] dark:bg-[#343333];
+  }
+  .inactive-nav {
+    @apply cursor-pointer hover:scale-105 hover:text-[#2f2e2e] dark:hover:text-[#fff] px-3 py-1 rounded-xl bg-[#ffffff] dark:bg-[#000];
+  }
 }

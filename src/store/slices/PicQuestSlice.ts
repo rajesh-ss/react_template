@@ -11,7 +11,7 @@ import { stat } from "fs";
 
 export type allQueriesType = {
   qns: string;
-  ans: string[];
+  ans: string;
 };
 
 const initialState = {
@@ -30,41 +30,36 @@ export const picQuestPostUploadImages = createAsyncThunk<
   picQuestPostUploadImagesSuccessType,
   FormData,
   { rejectValue: picQuestPostUploadImagesErrorType }
->(
-  "http://10.10.10.71:5000/check-guidelines",
-  async (formData, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post<
-        picQuestPostUploadImagesSuccessType,
-        AxiosResponse<picQuestPostUploadImagesSuccessType>,
-        FormData
-      >(`http://10.10.10.71:5000/check-guidelines`, formData);
-      return data;
-    } catch (err: unknown) {
-      const error = err as AxiosError<picQuestPostUploadImagesErrorType>;
-      if (!error.response) {
-        throw err;
-      }
-
-      return rejectWithValue(error.response.data);
+>("http://10.10.10.71:5000/set-docs", async (formData, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.post<
+      picQuestPostUploadImagesSuccessType,
+      AxiosResponse<picQuestPostUploadImagesSuccessType>,
+      FormData
+    >(`http://10.10.10.71:5000/set-docs`, formData);
+    return data;
+  } catch (err: unknown) {
+    const error = err as AxiosError<picQuestPostUploadImagesErrorType>;
+    if (!error.response) {
+      throw err;
     }
+
+    return rejectWithValue(error.response.data);
   }
-);
+});
 
 export const bankGPTChat = createAsyncThunk<
-  bankGPTChatSuccessType,
+  string,
   string,
   { rejectValue: bankGPTChatErrorType }
 >("10.10.10.175:6001/chat?text=", async (qns, { rejectWithValue }) => {
   try {
-    const formData = new FormData();
-    formData.append("message", qns);
+    // const formData = new FormData();
+    // formData.append("message", qns);
 
-    const { data } = await axios.post<
-      bankGPTChatSuccessType,
-      AxiosResponse<bankGPTChatSuccessType>,
-      FormData
-    >(`http://10.10.10.71:5000/chat`, formData);
+    const { data } = await axios.get<string, AxiosResponse<string>, FormData>(
+      `http://10.10.10.71:5000/chat?text=${qns}`
+    );
     return data;
   } catch (err: unknown) {
     const error = err as AxiosError<bankGPTChatErrorType>;

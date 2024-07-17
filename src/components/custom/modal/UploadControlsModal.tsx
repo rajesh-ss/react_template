@@ -182,22 +182,22 @@ function PicQuestUploadPic({ className }: React.ComponentProps<"div">) {
     const formData = new FormData();
 
     filesUploaded?.forEach((eachFile) => {
-      formData.append("check_pdf", eachFile);
+      formData.append("files", eachFile);
     });
 
-    filesContr?.forEach((eachFile) => {
-      formData.append("control_pdf", eachFile);
-    });
+    // filesContr?.forEach((eachFile) => {
+    //   formData.append("control_pdf", eachFile);
+    // });
 
     customDispatch(picQuestPostUploadImages(formData))
       .unwrap()
       .then((res) => {
-        const body: allQueriesType = {
-          ans: res?.data,
-          qns: "",
-        };
+        // const body: allQueriesType = {
+        //   ans: res?.data,
+        //   qns: "",
+        // };
 
-        dispatch(addQnsAns(body));
+        // dispatch(addQnsAns(body));
         toast(`${res?.message}`, {
           description: `${filesUploaded?.length} Files are uploaded`,
           icon: (
@@ -211,7 +211,7 @@ function PicQuestUploadPic({ className }: React.ComponentProps<"div">) {
   };
 
   return (
-    <div className="h-[80vh] overflow-y-auto">
+    <div className=" overflow-y-auto">
       <div
         className={cn("grid items-start gap-4", className)}
         // onSubmit={onsubmitUploadAllPics}
@@ -375,8 +375,8 @@ function PicQuestUploadPic({ className }: React.ComponentProps<"div">) {
           <></>
         )}
 
-        <div className="border-b-2 h-1  border-black flex-1"></div>
-        <p className="text-xl">Upload Controls Document</p>
+        {/* <div className="border-b-2 h-1  border-black flex-1"></div> */}
+        {/* <p className="text-xl">Upload Controls Document</p>
         <div
           id="drop_zone"
           onDrop={onDropHandlerContr}
@@ -391,8 +391,8 @@ function PicQuestUploadPic({ className }: React.ComponentProps<"div">) {
           <span className="border-b-2 h-1 border-dotted border-black flex-1"></span>
           <span className="mx-1">or</span>
           <span className="border-b-2 h-1 border-dotted border-black flex-1"></span>
-        </div>
-        <div className="border-0 flex justify-center pb-5 ">
+        </div> */}
+        {/* <div className="border-0 flex justify-center pb-5 ">
           <Label
             htmlFor="picture"
             className="border-2 rounded-[.4rem] text-[#1d1c1c] px-5 py-2 hover:scale-105 cursor-pointer"
@@ -407,7 +407,7 @@ function PicQuestUploadPic({ className }: React.ComponentProps<"div">) {
             className="bg-[#dbd9d9] hidden"
             onChange={onChangeFilesContr}
           />
-        </div>
+        </div> */}
         <Button
           className="mb-5 hover:scale-x-105 border-2 w-[20rem] mx-auto  rounded-[.4rem] text-[#fff] font-bold hover:bg-green-500 bg-green-600"
           variant={"ghost"}
