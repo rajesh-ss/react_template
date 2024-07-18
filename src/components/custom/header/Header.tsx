@@ -15,6 +15,8 @@ import {
   HamburgerMenuIcon,
 } from "@radix-ui/react-icons";
 import logo from "../../../assets/simplyfiLogo.png";
+import logo1 from "../../../assets/KPMG_logo.svg.png";
+
 import { NavLink } from "react-router-dom";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -106,11 +108,12 @@ export const Header: FC<HeaderPropsType> = (props) => {
               onClick={onClickHamburgerMenu}
             />
           </span>
-          <h1 className="text-[1rem] font-bold dark:text-white logo-font">
-          Cyber GPT
-          </h1>
+          <img src={logo1} alt="logo" className="h-[2.3rem] w-auto inline" />
+          {/* <h1 className="text-[1rem] font-bold dark:text-white logo-font bg-white dark:bg-black">
+            KPMG
+          </h1> */}
         </div>
-        <ul className="flex gap-2 text-[#646363] dark:text-[#e7e4e4] text-sm ">
+        <ul className="flex gap-2 text-[#646363] dark:text-[#e7e4e4] text-sm bg-white dark:bg-black">
           {props?.nav?.map((eachEle) => (
             <NavLink
               to={eachEle?.link}
@@ -119,7 +122,7 @@ export const Header: FC<HeaderPropsType> = (props) => {
               }
               key={nanoid()}
             >
-              {eachEle?.name}
+              <span className=" logo-font">{eachEle?.name}</span>
             </NavLink>
           ))}
         </ul>

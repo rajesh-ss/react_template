@@ -122,12 +122,12 @@ export const PicQuest = () => {
         <></>
       )}
       <div className="w-full h-full border-red-600 px-4 py-0 h-full overflow-hidden scroll-bar-medium-w scroll-bar-transparent  scroll-bar-thumb-rounded scroll-bar-thumb-grey">
-        <div className="h-[3rem] w-full flex items-center justify-between container border-b">
+        <div className="h-[3rem] w-full flex items-center justify-end container border-b-2 border-gray-300">
           <HoverCard>
             <HoverCardTrigger asChild>
-              <h1 className="text-base font-extrabold dark:text-white">
+              {/* <h1 className="text-base font-extrabold dark:text-white">
                 CyberGPT
-              </h1>
+              </h1> */}
             </HoverCardTrigger>
             <HoverCardContent className="w-80 bg-[#fff] dark:bg-[#000] dark:text-white">
               <div className="flex justify-between space-x-4">
@@ -158,7 +158,7 @@ export const PicQuest = () => {
                 setOpen={setUploadControls}
               >
                 <Button onClick={onClickUploadContrDoc}>
-                  <IoAddCircleSharp className="text-xl" />
+                  <IoAddCircleSharp className="text-2xl" />
                 </Button>
               </UploadControlsModal>
             </Button>
