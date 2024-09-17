@@ -15,7 +15,7 @@ import {
   HamburgerMenuIcon,
 } from "@radix-ui/react-icons";
 import logo from "../../../assets/simplyfiLogo.png";
-import logo1 from "../../../assets/KPMG_logo.svg.png";
+// import logo1 from "../../../assets/KPMG_logo.svg.png";
 
 import { NavLink } from "react-router-dom";
 import { nanoid } from "@reduxjs/toolkit";
@@ -108,7 +108,7 @@ export const Header: FC<HeaderPropsType> = (props) => {
               onClick={onClickHamburgerMenu}
             />
           </span>
-          <img src={logo1} alt="logo" className="h-[2.3rem] w-auto inline" />
+          {/* <img src={logo1} alt="logo" className="h-[2.3rem] w-auto inline" /> */}
           {/* <h1 className="text-[1rem] font-bold dark:text-white logo-font bg-white dark:bg-black">
             KPMG
           </h1> */}
