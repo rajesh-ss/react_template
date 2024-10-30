@@ -12,7 +12,7 @@ export const GenericLayout: FC<GenericLayoutPropsType> = (props) => {
         nav={[
           {
             link: "cybernew",
-            name: "LegalGPT",
+            name: "cyberGPT",
           },
           // {
           // 	link: 'ReportComply',

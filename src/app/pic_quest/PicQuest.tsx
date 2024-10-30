@@ -2,7 +2,7 @@
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { GiProcessor } from "react-icons/gi";
-import { FaRegUser } from "react-icons/fa6";
+import { FaRegUser, FaSpider } from "react-icons/fa6";
 import { nanoid } from "@reduxjs/toolkit";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { PicQuestModal } from "@/components/custom/modal/picQuestModal";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { TbTools } from "react-icons/tb";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { MdOutlineResetTv } from "react-icons/md";
 import {
   HoverCard,
   HoverCardContent,
@@ -26,11 +27,17 @@ import {
 } from "@/store/slices/PicQuestSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { UploadControlsModal } from "@/components/custom/modal/UploadControlsModal";
+import { ResetModal } from "@/components/custom/modal/ResetModal";
+import { CrawlerAddUrlModal } from "@/components/custom/modal/Crawler";
 
 export const PicQuest = () => {
   const [open, setOpen] = useState(false);
 
   const [uploadControls, setUploadControls] = useState(false);
+
+  const [resetControls, setResetControls] = useState(false);
+
+  const [crawlerControls, setCrawlerControls] = useState(false);
 
   const [query, setQuery] = useState<string>("");
   const customDispatch = useCustomDispatch();
@@ -83,6 +90,14 @@ export const PicQuest = () => {
 
   const onClickUploadContrDoc = () => {
     setUploadControls(true);
+  };
+
+  const onClickResetContext = () => {
+    setResetControls(true);
+  };
+
+  const onClickWebCrawler = () => {
+    setCrawlerControls(true);
   };
 
   useEffect(() => {
@@ -144,13 +159,13 @@ export const PicQuest = () => {
           </HoverCard>
 
           <div>
-            <div className="hidden">
+            {/* <div className="hidden">
               <PicQuestModal open={open} setOpen={setOpen}>
                 <Button onClick={onClickAddBtn}>
                   <IoAddCircleSharp className="h-7 w-7 hover:scale-105 dark:text-[#fff] " />
                 </Button>
               </PicQuestModal>
-            </div>
+            </div> */}
 
             <Button>
               <UploadControlsModal
@@ -161,6 +176,28 @@ export const PicQuest = () => {
                   <IoAddCircleSharp className="text-2xl" />
                 </Button>
               </UploadControlsModal>
+            </Button>
+
+            {/* ResetModal */}
+            <Button>
+              <ResetModal open={resetControls} setOpen={setResetControls}>
+                <Button onClick={onClickResetContext}>
+                  <MdOutlineResetTv className="text-2xl" />
+                </Button>
+              </ResetModal>
+            </Button>
+
+            {/* <FaSpider /> */}
+
+            <Button>
+              <CrawlerAddUrlModal
+                open={crawlerControls}
+                setOpen={setCrawlerControls}
+              >
+                <Button onClick={onClickWebCrawler}>
+                  <FaSpider className="text-2xl" />
+                </Button>
+              </CrawlerAddUrlModal>
             </Button>
           </div>
         </div>
