@@ -76,7 +76,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
         <DialogContent className="sm:max-w-[750px] min-w-[60vw] bg-white dark:bg-black text-black dark:text-white">
           <DialogHeader>
             <DialogTitle className="text-center text-xl font-extrabold">
-              Reset Context
+            Add the website URL to provide more context and additional information for our CyberGPT.
             </DialogTitle>
             {webCrawlerAddrUrlRes?.isLoading ? (
               <Ldr className="w-full" size={"sm"} />

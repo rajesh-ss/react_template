@@ -1,14 +1,11 @@
-// import { Button } from '@/components/ui/button';
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { GiProcessor } from "react-icons/gi";
 import { FaRegUser, FaSpider } from "react-icons/fa6";
 import { nanoid } from "@reduxjs/toolkit";
 import { IoAddCircleSharp } from "react-icons/io5";
-import { PicQuestModal } from "@/components/custom/modal/picQuestModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { TbTools } from "react-icons/tb";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { MdOutlineResetTv } from "react-icons/md";
@@ -17,7 +14,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-// import { CalendarIcon } from '@radix-ui/react-icons';
 import processingImage from "../../assets/processImage.png";
 import { RootState, useCustomDispatch } from "@/store";
 import {
@@ -28,11 +24,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { UploadControlsModal } from "@/components/custom/modal/UploadControlsModal";
 import { ResetModal } from "@/components/custom/modal/ResetModal";
-import { CrawlerAddUrlModal } from "@/components/custom/modal/Crawler";
+import { CrawlerAddUrlModal } from "@/components/custom/modal/CrawlerModal";
 
 export const PicQuest = () => {
-  const [open, setOpen] = useState(false);
-
   const [uploadControls, setUploadControls] = useState(false);
 
   const [resetControls, setResetControls] = useState(false);
@@ -82,10 +76,6 @@ export const PicQuest = () => {
 
   const onChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
-  };
-
-  const onClickAddBtn = () => {
-    setOpen(true);
   };
 
   const onClickUploadContrDoc = () => {
@@ -159,14 +149,6 @@ export const PicQuest = () => {
           </HoverCard>
 
           <div>
-            {/* <div className="hidden">
-              <PicQuestModal open={open} setOpen={setOpen}>
-                <Button onClick={onClickAddBtn}>
-                  <IoAddCircleSharp className="h-7 w-7 hover:scale-105 dark:text-[#fff] " />
-                </Button>
-              </PicQuestModal>
-            </div> */}
-
             <Button>
               <UploadControlsModal
                 open={uploadControls}
