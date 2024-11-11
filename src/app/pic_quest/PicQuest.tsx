@@ -228,7 +228,7 @@ export const PicQuest = () => {
               disabled={bankGPTChatRes?.isLoading}
             />
             <Button
-              type="button"
+              type="submit"
               className="hover:scale-x-110 "
               disabled={bankGPTChatRes?.isLoading}
             >
