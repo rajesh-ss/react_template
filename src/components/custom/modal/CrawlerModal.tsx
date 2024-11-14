@@ -149,7 +149,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
     return (
       <Dialog open={props?.open} onOpenChange={props?.setOpen}>
         <DialogTrigger asChild>{props?.children}</DialogTrigger>
-        <DialogContent className="sm:max-w-[750px] min-w-[60vw] bg-white dark:bg-black text-black dark:text-white">
+        <DialogContent className="sm:max-w-[750px] min-w-[60vw] max-h-[90vh] overflow-y-auto bg-white dark:bg-black text-black dark:text-white">
           <DialogHeader>
             <DialogTitle className="text-center text-xl font-extrabold">
               Add website URL or provide additional Context to our CyberGPT
