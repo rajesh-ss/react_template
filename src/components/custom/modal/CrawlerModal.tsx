@@ -26,6 +26,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Ldr } from "../loaders/Ldr";
 import { toast } from "sonner";
+import { nanoid } from "@reduxjs/toolkit";
 // import { webCrawlerAddrUrlPayloadType } from "@/types/picquestTypes";
 
 type CrawlerPRopsType = {
@@ -88,12 +89,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
     setUrl("");
   };
 
-  const onSubmitURLCrawler = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // const payload: webCrawlerAddrUrlPayloadType = {
-    //   selected_url: url,
-    // };
-
+  const onClickURLByRes = (url: string) => {
     const formData = new FormData();
     formData.append("selected_url", url);
 
@@ -102,6 +98,24 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
       .then((res) => {
         toast.success(res.message);
         props.setOpen(false);
+        setUrl("");
+      })
+      .catch((err) => {
+        setUrl("");
+      });
+  };
+
+  const onSubmitURLCrawler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("selected_url", url);
+
+    customDispatch(webCrawlerAddrUrl(formData))
+      .unwrap()
+      .then((res) => {
+        toast.success(res.message);
+        // props.setOpen(false);
         setUrl("");
       })
       .catch((err) => {
@@ -122,7 +136,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
     customDispatch(webCrawlerAddContext(formData))
       .unwrap()
       .then((res) => {
-        toast.success(`Successfully added ${res.available_links.join(",\n")}`);
+        toast.success(`Successfully added`);
 
         setCountry("");
         setDomain("");
@@ -130,18 +144,18 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
         setDocType("");
         setYear("");
 
-        props.setOpen(false);
+        // props.setOpen(false);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  React.useEffect(() => {
-    if (webCrawlerAddrUrlRes?.data || webCrawlerAddContextRes?.data) {
-      props?.setOpen(false);
-    }
-  }, [webCrawlerAddrUrlRes, webCrawlerAddContextRes]);
+  // React.useEffect(() => {
+  //   if (webCrawlerAddrUrlRes?.data || webCrawlerAddContextRes?.data) {
+  //     props?.setOpen(false);
+  //   }
+  // }, [webCrawlerAddrUrlRes, webCrawlerAddContextRes]);
 
   // For big screen
 
@@ -260,7 +274,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
               </label>
               <input
                 type="text"
-                placeholder="Enter the Country here"
+                placeholder="Enter the Enter Document type here"
                 id="IDDocType"
                 className="text-md font-semibold border-2 w-auto p-2 flex-1"
                 onChange={onChangeDocType}
@@ -300,6 +314,34 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
               </Button>
             </div>
           </form>
+          {webCrawlerAddContextRes?.data &&
+            webCrawlerAddContextRes?.data?.available_links?.map((link) => {
+              return (
+                <div
+                  className="py-2 border-2 rounded-lg grid grid-cols-12 gap-x-6 px-6 w-full"
+                  key={nanoid()}
+                >
+                  <p className="break-all col-span-10">{link}</p>
+                  <div className="flex justify-end items-center   w-full col-span-2">
+                    <Button
+                      variant={"default"}
+                      className="bg-green-600 text-white rounded-[.450rem] hover:bg-green-800"
+                      type="button"
+                      onClick={() => onClickURLByRes(link)}
+                    >
+                      Continue
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+
+          {webCrawlerAddrUrlRes?.isLoading ||
+          webCrawlerAddContextRes?.isLoading ? (
+            <Ldr className="w-full" size={"sm"} />
+          ) : (
+            <></>
+          )}
         </DialogContent>
       </Dialog>
     );
