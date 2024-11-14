@@ -25,6 +25,7 @@ import * as React from "react";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Ldr } from "../loaders/Ldr";
+import { toast } from "sonner";
 // import { webCrawlerAddrUrlPayloadType } from "@/types/picquestTypes";
 
 type CrawlerPRopsType = {
@@ -99,6 +100,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
     customDispatch(webCrawlerAddrUrl(formData))
       .unwrap()
       .then((res) => {
+        toast.success(res.message);
         props.setOpen(false);
         setUrl("");
       })
@@ -119,7 +121,9 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
 
     customDispatch(webCrawlerAddContext(formData))
       .unwrap()
-      .then(() => {
+      .then((res) => {
+        toast.success(`Successfully added ${res.available_links.join(",\n")}`);
+
         setCountry("");
         setDomain("");
         setRegulatoryName("");

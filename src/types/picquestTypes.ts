@@ -37,6 +37,7 @@ export type webCrawlerAddrUrlErrorType = {
 export type webCrawlerAddContextSuccessType = {
   status: true;
   message: string;
+  available_links: string[];
 };
 
 export type webCrawlerAddContextErrorType = {
