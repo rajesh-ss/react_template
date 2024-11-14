@@ -5,8 +5,9 @@ import {
   picQuestPostUploadImagesSuccessType,
   resetContextErrorType,
   resetContextSuccessType,
+  webCrawlerAddContextErrorType,
+  webCrawlerAddContextSuccessType,
   webCrawlerAddrUrlErrorType,
-  webCrawlerAddrUrlPayloadType,
   webCrawlerAddrUrlSuccessType,
 } from "@/types/picquestTypes";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -36,6 +37,11 @@ const initialState = {
   webCrawlerAddrUrl: reduxStateTemplate<
     webCrawlerAddrUrlSuccessType,
     webCrawlerAddrUrlErrorType
+  >(),
+
+  webCrawlerAddContext: reduxStateTemplate<
+    webCrawlerAddContextSuccessType,
+    webCrawlerAddContextErrorType
   >(),
 };
 
@@ -67,9 +73,6 @@ export const bankGPTChat = createAsyncThunk<
   { rejectValue: bankGPTChatErrorType }
 >("10.10.10.175:6001/chat?text=", async (qns, { rejectWithValue }) => {
   try {
-    // const formData = new FormData();
-    // formData.append("message", qns);
-
     const { data } = await axios.get<string, AxiosResponse<string>, FormData>(
       `http://10.10.10.71:5000/chat?text=${qns}`
     );
@@ -110,28 +113,48 @@ export const resetContext = createAsyncThunk<
 // webCrawlerAddrUrl
 export const webCrawlerAddrUrl = createAsyncThunk<
   webCrawlerAddrUrlSuccessType,
-  webCrawlerAddrUrlPayloadType,
+  FormData,
   { rejectValue: webCrawlerAddrUrlErrorType }
->(
-  "10.10.10.71:5000/add_url_webcrawler",
-  async (payload, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post<
-        webCrawlerAddrUrlSuccessType,
-        AxiosResponse<webCrawlerAddrUrlSuccessType>,
-        webCrawlerAddrUrlPayloadType
-      >(`http://10.10.10.71:5000/add_url_webcrawler`, payload);
-      return data;
-    } catch (err: unknown) {
-      const error = err as AxiosError<webCrawlerAddrUrlErrorType>;
-      if (!error.response) {
-        throw err;
-      }
-
-      return rejectWithValue(error.response.data);
+>("10.10.10.71:5000/preprocess-urls", async (payload, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.post<
+      webCrawlerAddrUrlSuccessType,
+      AxiosResponse<webCrawlerAddrUrlSuccessType>,
+      FormData
+    >(`http://10.10.10.71:5000/preprocess-urls`, payload);
+    return data;
+  } catch (err: unknown) {
+    const error = err as AxiosError<webCrawlerAddrUrlErrorType>;
+    if (!error.response) {
+      throw err;
     }
+
+    return rejectWithValue(error.response.data);
   }
-);
+});
+
+// createContext webCrawler
+export const webCrawlerAddContext = createAsyncThunk<
+  webCrawlerAddContextSuccessType,
+  FormData,
+  { rejectValue: webCrawlerAddContextErrorType }
+>("10.10.10.71:5000/send-urls", async (payload, { rejectWithValue }) => {
+  try {
+    const { data } = await axios.post<
+      webCrawlerAddContextSuccessType,
+      AxiosResponse<webCrawlerAddContextSuccessType>,
+      FormData
+    >(`http://10.10.10.71:5000/send-urls`, payload);
+    return data;
+  } catch (err: unknown) {
+    const error = err as AxiosError<webCrawlerAddContextErrorType>;
+    if (!error.response) {
+      throw err;
+    }
+
+    return rejectWithValue(error.response.data);
+  }
+});
 
 export const PicQuestSlice = createSlice({
   name: "picQuest",
@@ -219,6 +242,26 @@ export const PicQuestSlice = createSlice({
           status: false,
         };
         state.webCrawlerAddrUrl.data = null;
+      })
+
+      //webCrawlerAddContext
+      .addCase(webCrawlerAddContext.pending, (state) => {
+        state.webCrawlerAddContext.data = null;
+        state.webCrawlerAddContext.isLoading = true;
+        state.webCrawlerAddContext.error = null;
+      })
+      .addCase(webCrawlerAddContext.fulfilled, (state, action) => {
+        state.webCrawlerAddContext.isLoading = false;
+        state.webCrawlerAddContext.error = null;
+        state.webCrawlerAddContext.data = action.payload;
+      })
+      .addCase(webCrawlerAddContext.rejected, (state, action) => {
+        state.webCrawlerAddContext.isLoading = false;
+        state.webCrawlerAddContext.error = action.payload ?? {
+          message: "",
+          status: false,
+        };
+        state.webCrawlerAddContext.data = null;
       });
   },
 });

@@ -25,11 +25,21 @@ export type webCrawlerAddrUrlSuccessType = {
   message: string;
 };
 
-export type webCrawlerAddrUrlPayloadType = {
-  url: string;
-};
+// export type webCrawlerAddrUrlPayloadType = {
+//   selected_url: string;
+// };
 
 export type webCrawlerAddrUrlErrorType = {
+  status: false;
+  message: string;
+};
+
+export type webCrawlerAddContextSuccessType = {
+  status: true;
+  message: string;
+};
+
+export type webCrawlerAddContextErrorType = {
   status: false;
   message: string;
 };
