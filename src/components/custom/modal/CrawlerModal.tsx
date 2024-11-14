@@ -208,7 +208,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
 
           <h2 className="text-center text-xl font-extrabold">
             Enter Keywords to provide more context and additional information
-            for out cybergpt
+            for our cybergpt
           </h2>
 
           <form className="" onSubmit={onSubmitAddContext}>
