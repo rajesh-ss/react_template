@@ -113,8 +113,8 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
     const formData = new FormData();
     formData.append("country", country);
     formData.append("domain", domain);
-    formData.append("regulatoryName", regulatoryName);
-    formData.append("docType", docType);
+    formData.append("regulatory_name", regulatoryName);
+    formData.append("doc_type", docType);
     formData.append("year", year);
 
     customDispatch(webCrawlerAddContext(formData))
