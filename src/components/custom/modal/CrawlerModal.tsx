@@ -53,25 +53,25 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
     (state: RootState) => state.picQuest.webCrawlerAddContext
   );
 
-  const onChangeCountry = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCountry = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCountry(event.target.value);
   };
 
-  const onChangeDomain = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeDomain = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setDomain(event.target.value);
   };
 
   const onChangeRegulatoryName = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setRegulatoryName(event.target.value);
   };
 
-  const onChangeDocType = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeDocType = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setDocType(event.target.value);
   };
 
-  const onChangeYear = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setYear(event.target.value);
   };
 
@@ -165,7 +165,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
         <DialogTrigger asChild>{props?.children}</DialogTrigger>
         <DialogContent className="sm:max-w-[750px] min-w-[60vw] max-h-[90vh] overflow-y-auto bg-white dark:bg-black text-black dark:text-white">
           <DialogHeader>
-            <DialogTitle className="text-center text-xl font-extrabold">
+            <DialogTitle className="text-center text-lg font-extrabold">
               Add website URL or provide additional Context to our CyberGPT
             </DialogTitle>
             {webCrawlerAddrUrlRes?.isLoading ||
@@ -176,7 +176,7 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
             )}
           </DialogHeader>
 
-          <h2 className="mt-16 text-center text-xl font-extrabold">
+          <h2 className="mt-16 text-center text-lg font-extrabold">
             Add the website URL to provide more context and additional
             information for our CyberGPT.
           </h2>
@@ -220,80 +220,150 @@ export const CrawlerAddUrlModal: React.FC<CrawlerPRopsType> = (props) => {
             <span className="border-b-2 h-1 border-dotted border-black flex-1"></span>
           </div>
 
-          <h2 className="text-center text-xl font-extrabold">
+          <h2 className="text-center text-lg font-extrabold">
             Enter Keywords to provide more context and additional information
             for our cybergpt
           </h2>
 
           <form className="" onSubmit={onSubmitAddContext}>
-            <div className="flex items-center my-5">
-              <label htmlFor="IDCountry" className="text-md font-bolx mx-5">
+            <div className="grid grid-cols-12 my-8">
+              <label
+                htmlFor="IDCountry"
+                className="text-md font-bold mx-5 col-span-3 flex justify-start items-center"
+              >
                 Enter Country
               </label>
-              <input
-                type="text"
-                placeholder="Enter the Country here"
+              <select
                 id="IDCountry"
-                className="text-md font-semibold border-2 w-auto p-2 flex-1"
+                className="text-md font-semibold w-auto p-2  col-span-9"
                 onChange={onChangeCountry}
                 value={country}
-              />
+              >
+                <option value="" defaultChecked disabled>
+                  Select country
+                </option>
+                {/* India, Pakistan, Australia, Malaysia, Srilanka, Afganistan, Egypt, Oman, Poland, Turkey, USA, UK, Singapore, Hongkong, Bangladesh */}
+
+                <option value={"india"}>{"India"}</option>
+                <option value={"pakistan"}>{"Pakistan"}</option>
+                <option value={"australia"}>{"Australia"}</option>
+                <option value={"malaysia"}>{"Malaysia"}</option>
+                <option value={"srilanka"}>{"Srilanka"}</option>
+                <option value={"afganistan"}>{"Afganistan"}</option>
+                <option value={"egypt"}>{"Egypt"}</option>
+                <option value={"oman"}>{"Oman"}</option>
+                <option value={"poland"}>{"Poland"}</option>
+                <option value={"turkey"}>{"Turkey"}</option>
+                <option value={"usa"}>{"USA"}</option>
+                <option value={"uk"}>{"UK"}</option>
+                <option value={"singapore"}>{"Singapore"}</option>
+                <option value={"hongkong"}>{"Hongkong"}</option>
+                <option value={"bangladesh"}>{"Bangladesh"}</option>
+              </select>
             </div>
 
-            <div className="flex items-center my-5">
-              <label htmlFor="IDDomain" className="text-md font-bolx mx-5">
+            <div className="grid grid-cols-12 my-8">
+              <label
+                htmlFor="IDDomain"
+                className="text-md font-bold mx-5 col-span-3 flex justify-start items-center"
+              >
                 Enter Domain/Sector
               </label>
-              <input
-                type="text"
-                placeholder="Enter the Domain/Sector here"
+              <select
                 id="IDDomain"
-                className="text-md font-semibold border-2 w-auto p-2 flex-1"
+                className="text-md font-semibold border-2 w-auto p-2 flex-1 col-span-9"
                 onChange={onChangeDomain}
                 value={domain}
-              />
+              >
+                <option value="" defaultChecked disabled>
+                  Select Domain/Sector
+                </option>
+                {/* Finance, Banking, Telecom, Cyber Security, Process compliance */}
+                <option value={"finance"}>{"Finance"}</option>
+                <option value={"banking"}>{"Banking"}</option>
+                <option value={"telecom"}>{"Telecom"}</option>
+                <option value={"cyber-security"}>{"Cyber Security"}</option>
+                <option value={"process-compliance"}>
+                  {"Process compliance"}
+                </option>
+              </select>
             </div>
 
-            <div className="flex items-center my-5">
-              <label htmlFor="IDRegulatory" className="text-md font-bolx mx-5">
+            <div className="grid grid-cols-12 my-8">
+              <label
+                htmlFor="IDRegulatory"
+                className="text-md font-bold mx-5 col-span-3 flex justify-start items-center"
+              >
                 Enter Regulatory/Authority name
               </label>
-              <input
-                type="text"
-                placeholder="Enter the Regulatory/Authority name here"
+              <select
                 id="IDRegulatory"
-                className="text-md font-semibold border-2 w-auto p-2 flex-1"
+                className="text-md font-semibold border-2 w-auto p-2 col-span-9"
                 onChange={onChangeRegulatoryName}
                 value={regulatoryName}
-              />
+              >
+                <option value="" defaultChecked disabled>
+                  Select Regulatory/Authority name
+                </option>
+
+                {/* RBI, SEBI, NIST-CSF, HKMA, APRA, ISO 27001, FFIEC */}
+
+                <option value="RBI">RBI</option>
+                <option value="SEBI">SEBI</option>
+                <option value="NIST-CSF">NIST-CSF</option>
+                <option value="HKMA">HKMA</option>
+                <option value="APRA">APRA</option>
+                <option value="ISO 27001">ISO 27001</option>
+                <option value="FFIEC">FFIEC</option>
+              </select>
             </div>
 
-            <div className="flex items-center my-5">
-              <label htmlFor="IDDocType" className="text-md font-bolx mx-5">
+            <div className="grid grid-cols-12 my-8">
+              <label
+                htmlFor="IDDocType"
+                className="text-md font-bold mx-5 col-span-3 flex justify-start items-center"
+              >
                 Enter Document type
               </label>
-              <input
-                type="text"
-                placeholder="Enter the Enter Document type here"
+              <select
                 id="IDDocType"
-                className="text-md font-semibold border-2 w-auto p-2 flex-1"
+                className="text-md font-semibold border-2 w-auto p-2 col-span-9"
                 onChange={onChangeDocType}
                 value={docType}
-              />
+              >
+                <option value="" defaultChecked disabled>
+                  Enter Document type
+                </option>
+                {/* PDF/XLS/ .CSV/Microsoft Word */}
+                <option value="pdf">PDF</option>
+                <option value="xls">XLS</option>
+                <option value="csv">CSV</option>
+                <option value="word">Microsoft Word</option>
+              </select>
             </div>
 
-            <div className="flex items-center my-5">
-              <label htmlFor="IDYear" className="text-md font-bolx mx-5">
+            <div className="grid grid-cols-12 my-8">
+              <label
+                htmlFor="IDYear"
+                className="text-md font-bold mx-5 col-span-3 flex justify-start items-center"
+              >
                 Select Year
               </label>
-              <input
-                type="year"
-                placeholder="Enter the Year"
+              <select
                 id="IDYear"
-                className="text-md font-semibold border-2 w-auto p-2 flex-1"
+                className="text-md font-semibold border-2 w-auto p-2 col-span-9"
                 onChange={onChangeYear}
                 value={year}
-              />
+              >
+                <option value="" defaultChecked disabled>
+                  Select year
+                </option>
+                <option value={"1980-1990"}>1980-1990</option>
+                <option value={"1990-2000"}>1990-2000</option>
+                <option value={"2000-2010"}>2000-2010</option>
+                <option value={"2010-2020"}>2010-2020</option>
+                <option value={"2020-2024"}>2020-2024</option>
+              </select>
             </div>
 
             <div className="flex justify-end items-center p-5 gap-x-5 ">
